@@ -1,0 +1,32 @@
+version: '3'
+
+services: 
+  mongo: 
+    image: "mongo:latest"
+    ports:
+      - "17017:27017"
+    command: mongod
+  feast:
+    depends_on: 
+    - mongo
+    build: ./user
+    ports: 
+      - "4001:4001"
+  feast:
+    depends_on: 
+    - mongo
+    build: ./feast
+    ports: 
+      - "4002:4002"
+  futsal:
+    depends_on: 
+    - mongo
+    build: ./futsal
+    ports: 
+      - "4003:4003"
+  watching:
+    depends_on: 
+    - mongo
+    build: ./watching
+    ports: 
+      - "4004:4004"
